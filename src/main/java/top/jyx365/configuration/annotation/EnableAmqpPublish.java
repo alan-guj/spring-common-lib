@@ -8,10 +8,12 @@ import java.lang.annotation.Target;
 
 import org.springframework.context.annotation.Import;
 
+import top.jyx365.configuration.amqp.AmqpConfiguration;
+
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import({})
+@Import({AmqpConfiguration.class})
 public @interface EnableAmqpPublish {
 
 }

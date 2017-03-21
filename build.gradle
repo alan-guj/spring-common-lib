@@ -28,7 +28,7 @@ group = "top.jyx365.service"
 version = '0.0.1-SNAPSHOT'
 jar {
 	baseName = 'jyx365-spring-common-lib'
-	version = '${version}'
+	version = "${version}"
 }
 
 
