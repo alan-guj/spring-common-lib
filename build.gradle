@@ -1,0 +1,70 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.3.RELEASE'
+	}
+	repositories {
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'   }
+        maven { url "https://repo.spring.io/snapshot"   }
+        maven { url "https://repo.spring.io/milestone"   }
+        mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+plugins {
+        id "org.gradle.java"
+        id "com.scuilion.syntastic" version "0.3.6"
+        /*id "com.gorylenko.gradle-git-properties" version "1.4.16"*/
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'maven'
+
+group = "top.jyx365.service"
+version = '0.0.1-SNAPSHOT'
+jar {
+	baseName = 'jyx365-spring-common-lib'
+	version = '${version}'
+}
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'   }
+    maven { url "https://repo.spring.io/snapshot"   }
+    maven { url "https://repo.spring.io/milestone"   }
+	mavenCentral()
+}
+
+
+dependencies {
+    compile('org.springframework.cloud:spring-cloud-starter-consul-all')
+    compile('org.springframework.cloud:spring-cloud-starter-feign')
+    compile('org.springframework.boot:spring-boot-starter-amqp')
+    compile('org.springframework.boot:spring-boot-starter-aop')
+    compile('org.springframework.cloud:spring-cloud-security')
+    compile('io.springfox:springfox-swagger-ui:2.6.1')
+    compile('io.springfox:springfox-swagger2:2.6.1')
+	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+	imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.RELEASE'
+	}
+}
+
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "http://114.55.56.246:8081/nexus/content/repositories/snapshots/") {
+            authentication(userName: "admin", password: "admin123")
+        }
+    }
+}

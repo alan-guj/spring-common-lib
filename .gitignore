@@ -1,0 +1,5 @@
+build/*
+*.log*
+.gradle/*
+.syntastic_javac_config
+*.out
