@@ -51,12 +51,16 @@ public class AmqpPublisherInterceptor {
             String methodName = publishMessage.method(); //获取被拦截的方法名
             if(methodName.equals("")) methodName = method.getName(); //获取被拦截的方法名
             if( retVal != null ){
-                Map<String,Object> message = new HashMap<String,Object>();
-                message.put("message",retVal);
-                message.put("timestamp",new Date());
-                message.put("method", methodName);
-                sender.send(methodName+"."+publishMessage.key(), message);
-                log.info("sendMessage:{}",message);
+                try {
+                    Map<String,Object> message = new HashMap<String,Object>();
+                    message.put("message",retVal);
+                    message.put("timestamp",new Date());
+                    message.put("method", methodName);
+                    sender.send(methodName+"."+publishMessage.key(), message);
+                    log.info("sendMessage:{}",message);
+                }catch(Exception ex) {
+                    ex.printStackTrace();
+                }
             }
 
             log.debug("AfterReturning:{};key:{};methodString:{};target:{};annotations:{}",

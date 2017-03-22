@@ -27,7 +27,7 @@ apply plugin: 'maven'
 group = "top.jyx365.service"
 version = '0.0.1-SNAPSHOT'
 jar {
-	baseName = 'jyx365-spring-common-lib'
+	baseName = 'spring-common-lib'
 	version = "${version}"
 }
 
@@ -48,8 +48,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-amqp')
     compile('org.springframework.boot:spring-boot-starter-aop')
     compile('org.springframework.cloud:spring-cloud-security')
+    compile('org.springframework.security.oauth:spring-security-oauth2')
     compile('io.springfox:springfox-swagger-ui:2.6.1')
     compile('io.springfox:springfox-swagger2:2.6.1')
+    compile('io.springfox:springfox-data-rest:2.6.1')
+    compile("io.springfox:springfox-bean-validators:2.6.1")
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
